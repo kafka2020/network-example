@@ -10,12 +10,13 @@ public class Server {
             System.out.println("Сервер стартовал!");
             while (true) {
                 try (Socket clientSocket = serverSocket.accept();
-                     PrintWriter printWriter = new PrintWriter(clientSocket.getOutputStream(), true);
-                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
+                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
                 ) {
-                    String infoFromClient = bufferedReader.readLine();
-                    System.out.printf("Client port %d; Info from client: %s%n", clientSocket.getPort(), infoFromClient);
-                    printWriter.println(clientSocket.getPort() + " Эта строчка отправлена с сервера");
+                    System.out.println("New connection accepted");
+                    final String name = in.readLine();
+//                    System.out.println("А это печать с сервера " + name + " Порт клиента " + clientSocket.getPort());
+                    out.println(String.format("Hi %s, your port is %d", name, clientSocket.getPort()));
                 }
             }
         } catch (IOException e) {

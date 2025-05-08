@@ -10,7 +10,7 @@ public class Client {
              PrintWriter printWriter = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
         ) {
-            printWriter.println("Hello from Andrey!");
+            printWriter.println("ANDRES");
             String serverResponse = bufferedReader.readLine();
             System.out.println(serverResponse);
         } catch (IOException e) {
